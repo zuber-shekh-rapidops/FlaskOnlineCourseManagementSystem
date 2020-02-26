@@ -2,13 +2,15 @@ from flask import Blueprint,render_template,redirect,url_for,flash
 from online_course_app.app import db
 from online_course_app.student.forms import LoginForm,SignupForm
 from online_course_app.student.models import StudentModel
-from flask_login import login_required,login_user,logout_user
+from flask_login import login_required,login_user,logout_user,current_user
 
 student=Blueprint('student',__name__,url_prefix='/student')
 
 # student/login
 @student.route('/login',methods=['GET','POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('student.home'))
     form=LoginForm()
     if form.validate_on_submit():
         student=StudentModel.query.filter_by(email=form.email.data).first()
@@ -24,6 +26,8 @@ def login():
 # student/signup
 @student.route('/signup',methods=['GET','POST'])
 def signup():
+    if current_user.is_authenticated:
+        return redirect(url_for('student.home'))
     form=SignupForm()
     if form.validate_on_submit():
         student=StudentModel(email=form.email.data,
@@ -44,6 +48,7 @@ def signup():
 @student.route('/home')
 @login_required
 def home():
+    print(current_user.is_authenticated)
     return render_template('student/home.html')
 
 
@@ -51,6 +56,7 @@ def home():
 @student.route('/logout')
 @login_required
 def logout():
+    
     logout_user()
     flash('logout successfully!')
     return redirect(url_for('student.login'))

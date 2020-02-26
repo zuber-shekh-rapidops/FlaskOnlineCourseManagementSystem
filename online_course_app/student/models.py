@@ -7,7 +7,7 @@ def load_user(id):
     return StudentModel.query.get(int(id))
 
 class StudentModel(db.Model,UserMixin):
-    __tablename_='students'
+    __tablename__='student'
     id=db.Column(db.Integer,primary_key=True)
     username=db.Column(db.String(30),unique=True,nullable=False)
     email=db.Column(db.String(30),unique=True,nullable=False)
@@ -18,6 +18,7 @@ class StudentModel(db.Model,UserMixin):
     dob=db.Column(db.DateTime,nullable=False)
     gender=db.Column(db.String(20),nullable=False)
     profile_pic=db.Column(db.String(100),nullable=False,default='profile_pic.jpg')
+    is_student=db.Column(db.Boolean,nullable=True,server_default="True")
     
     def __init__(self,email,password,mobile,first_name,last_name,dob,gender):
         self.username=str(email).split('@')[0]

@@ -15,11 +15,15 @@
     <nav>
         <ul>
             <li><a href="{{url_for('main.index')}}">home</a></li>
+            
             {%if current_user.is_authenticated%}
                 <li><a href="{{url_for('student.logout')}}">logout</a></li>
+                <li><a href="{{url_for('faculty.logout')}}">logout</a></li>
             {%else%}
-                <li><a href="{{url_for('student.login')}}">login</a></li>
-                <li><a href="{{url_for('student.signup')}}">signup</a></li>
+                <li><a href="{{url_for('student.login')}}">studnet login</a></li>
+                <li><a href="{{url_for('faculty.login')}}">faculty login</a></li>
+                <li><a href="{{url_for('student.signup')}}">student signup</a></li>
+                <li><a href="{{url_for('faculty.signup')}}">faculty signup</a></li>
             {%endif%}
             
             

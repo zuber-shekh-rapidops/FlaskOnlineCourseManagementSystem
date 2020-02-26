@@ -19,10 +19,13 @@ login_manager=LoginManager(app)
 # *********************************************BLUEPRINTS**********************************************************
 from online_course_app.main.views import main
 from online_course_app.student.views import student
+from online_course_app.faculty.views import faculty
 
 app.register_blueprint(main)
 app.register_blueprint(student)
+app.register_blueprint(faculty)
 
 # *********************************************VIEWS**********************************************************
 from online_course_app.main import views
 from online_course_app.student import views
+from online_course_app.faculty import views
