@@ -13,7 +13,17 @@
     </header>
     <!-- ******************************************************NAVIGATION******************************************** -->
     <nav>
-
+        <ul>
+            <li><a href="{{url_for('main.index')}}">home</a></li>
+            {%if current_user.is_authenticated%}
+                <li><a href="{{url_for('student.logout')}}">logout</a></li>
+            {%else%}
+                <li><a href="{{url_for('student.login')}}">login</a></li>
+                <li><a href="{{url_for('student.signup')}}">signup</a></li>
+            {%endif%}
+            
+            
+        </ul>
     </nav>
     <!-- ******************************************************MAIN******************************************** -->
     <main>
@@ -22,7 +32,10 @@
     </main>
     <!-- ******************************************************FOOTER******************************************** -->
     <footer>
-
+        <section>
+            <h4>copyright &copy; 2020</h4>
+            <p>all rights are reserved by zuber shekh</p>
+        </section>
     </footer>
 </body>
 </html>
